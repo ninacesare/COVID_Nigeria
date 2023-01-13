@@ -63,26 +63,33 @@ d3_m2$infection_fatality_rate <- d3_m2$period_cases/d3_m2$population_2016 * 1000
 
 ### Plot mortality rates ####
 
-p_all <- ggplot(d3_m, aes(reorder(state, -mortality_rate), mortality_rate, color = political_region, fill = political_region)) + 
+p_all <- ggplot(d3_m, aes(reorder(state, -mortality_rate), mortality_rate,  fill = political_region)) + 
   geom_bar(stat = "identity") +
   xlab("State") + 
   ylab("Mortality Rate \n (Deaths per 100,000 residents)") + 
   ggtitle("Full time period: February 27th 2020 to July 25th 2021") + 
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-p_1 <- ggplot(d3_m, aes(reorder(state, -mortality_rate), mortality_rate, color = political_region, fill = political_region)) + 
+p_1 <- ggplot(d3_m1, aes(reorder(state, -mortality_rate), mortality_rate, fill = political_region)) + 
   geom_bar(stat = "identity") +
   xlab("State") + 
   ylab("Mortality Rate \n (Deaths per 100,000 residents)") + 
   ggtitle("Period one: February 27th 2020 to October 24th 2020") + 
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-p_2 <- ggplot(d3_m, aes(reorder(state, -mortality_rate), mortality_rate, color = political_region, fill = political_region)) + 
+p_2 <- ggplot(d3_m2, aes(reorder(state, -mortality_rate), mortality_rate, fill = political_region)) + 
   geom_bar(stat = "identity") +
   xlab("State") + 
   ylab("Mortality Rate \n (Deaths per 100,000 residents)") + 
   ggtitle("Period two: October 25th 2020 to July 25th 2021") + 
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  
 
 pdf("//ad.bu.edu/bumcfiles/SPH/DCC/Dept/LeveragingAI/Spring2022/Nigeria COVID/Figure_2.pdf", width=6, height=10)
 Rmisc::multiplot(p_all, p_1, p_2, cols = 1)
